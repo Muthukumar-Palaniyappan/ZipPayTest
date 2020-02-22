@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ZipPay.API/.vs/ZipPay.API/DesignTimeBuild
+/ZipPay.API/.vs/ZipPay.API/v15/Server/sqlite3
+/ZipPay.API/.vs/ZipPay.API/v15
+/ZipPay.API/.vs/config
+/ZipPay.API/ZipPay.API/bin/Debug/netcoreapp2.1
+/ZipPay.API/ZipPay.API/obj
+/ZipPay.API/ZipPay.Business/bin/Debug/netcoreapp2.1
+/ZipPay.API/ZipPay.Business/obj
+/ZipPay.API/ZipPay.Data/bin/Debug/netcoreapp2.1
+/ZipPay.API/ZipPay.Data/obj
+/ZipPay.API/ZipPay.DataContract/bin/Debug/netcoreapp2.1
+/ZipPay.API/ZipPay.DataContract/obj
