@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MediatR;
+//using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,6 +16,7 @@ using ZipPay.Data;
 using ZipPay.Data.Entities;
 using ZipPay.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
+using ZipPay.Business;
 
 namespace ZipPay.API
 {
@@ -33,21 +34,24 @@ namespace ZipPay.API
         {
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ZipPay API", Version = "v1" });
             });
-            services.AddMediatR(typeof(Startup));
-            var assembly = AppDomain.CurrentDomain.Load("ZipPay.Business");
-            services.AddMediatR(assembly);
+            //services.AddMediatR(typeof(Startup));
+            //var assembly = AppDomain.CurrentDomain.Load("ZipPay.Business");
+            //services.AddMediatR(assembly);
+            
             services.AddDbContext<ZipEntities>();
             ConfigureAppSettings(services);
             ConfigureDependencies(services);
+            
         }
 
         private void ConfigureDependencies(IServiceCollection services)
         {
+            services.AddBusinessDependencies();
             services.AddScoped<IUserRepository,UserRepository>();
         }
 

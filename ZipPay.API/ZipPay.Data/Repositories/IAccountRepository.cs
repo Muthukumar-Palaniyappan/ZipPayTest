@@ -6,9 +6,8 @@ using ZipPay.Data.Entities;
 
 namespace ZipPay.Data.Repositories
 {
-    public interface IUserRepository
+    public interface IAccountRepository
     {
-        Task<List<UserEntity>> GetUserListAsync();
-        Task<UserEntity> GetUserByEmailAsync(string emailAddress);
+        Task<List<AccountEntity>> GetAccountListAsync();
     }
 }

@@ -16,7 +16,15 @@ namespace ZipPay.Data.Repositories
         {
             _zipEntities = new ZipEntities();
         }
-        public async Task<List<UserEntity>> GetAllUsersAsync()
+
+        public async Task<UserEntity> GetUserByEmailAsync(string emailAddress)
+        {
+            return await _zipEntities.UserEntities
+                .SingleOrDefaultAsync(u => string.Equals(u.EmailAddress,emailAddress,
+                StringComparison.OrdinalIgnoreCase));
+        }
+
+        public async Task<List<UserEntity>> GetUserListAsync()
         {
             return await _zipEntities.UserEntities.ToListAsync();
         }

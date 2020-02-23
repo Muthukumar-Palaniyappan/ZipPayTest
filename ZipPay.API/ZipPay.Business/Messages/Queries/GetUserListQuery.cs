@@ -6,10 +6,7 @@ using ZipPay.DataContract;
 
 namespace ZipPay.Business.Messages.Queries
 {
-    public class GetAllUsersQuery:IRequest<List<User>>
+    public class GetUserListQuery:IRequest<List<User>>
     {
-        public GetAllUsersQuery()
-        { }
-      
     }
 }

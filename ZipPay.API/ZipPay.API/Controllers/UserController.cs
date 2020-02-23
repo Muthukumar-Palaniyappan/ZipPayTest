@@ -21,19 +21,18 @@ namespace ZipPay.API.Controllers
         }
 
  
-        // GET api/values
+        // GET api/user
         [HttpGet]
-        public async Task<ActionResult<List<User>>> Get()
+        public async Task<ActionResult<List<User>>> GetUserList()
         {
-            return await _mediator.Send(new GetAllUsersQuery());
-            //return new string[] { "value1", "value2" };
+            return await _mediator.Send(new GetUserListQuery());
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        // GET api/user/doe@pubmail.com
+        [HttpGet("{emailAddress}")]
+        public async Task<ActionResult<User>> GetUserByEmail(string emailAddress)
         {
-            return "value";
+            return await _mediator.Send(new GetUserByEmailQuery(emailAddress));
         }
 
         // POST api/values
