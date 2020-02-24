@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using ZipPay.Business.Handlers.QueryHandler;
 using ZipPay.Business.Mapper;
 using ZipPay.Business.Messages.Commands;
@@ -11,6 +12,7 @@ using ZipPay.Data.Repositories.Read;
 using ZipPay.Data.Repositories.Write;
 using ZipPay.DataContract;
 using ZipPay.DataContract.Exceptions;
+using FluentAssertions;
 
 namespace ZipPay.Business.Tests
 {
@@ -65,21 +67,16 @@ namespace ZipPay.Business.Tests
             //Arrange
             UserEntity retrievedUser = GetRetrievedEntity();
             _userReadRepositoryMock.Setup(s => s.GetUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(retrievedUser);
-            //Act //Assert
-             Assert.ThrowsException<AggregateException>(() =>  _createUserHandlerSut.Handle(createuserCommand, CancellationToken.None).Result);
-          
-        }
+            
+            //Act 
+            Func<Task> createUser = async () => await _createUserHandlerSut.Handle(createuserCommand, CancellationToken.None);
 
-        [TestMethod]
-        public void Handle_UserEmailInvalid()
-        {
-            //Arrange
-            createuserCommand._User.EmailAddress = "aa";
-            UserEntity retrievedUser = GetRetrievedEntity();
-            _userReadRepositoryMock.Setup(s => s.GetUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(retrievedUser);
-            //Act //Assert
-            Assert.ThrowsException<AggregateException>(() => _createUserHandlerSut.Handle(createuserCommand, CancellationToken.None).Result);
+            //Assert
+            createUser.Should().Throw<BadRequestException>()
+                .WithMessage($"User with email address { createuserCommand._User.EmailAddress} already exists.");
 
         }
+
+      
     }
 }
