@@ -10,7 +10,7 @@ using ZipPay.Data.Entities;
 namespace ZipPay.Data.Migrations
 {
     [DbContext(typeof(ZipEntities))]
-    [Migration("20200222143920_Initial")]
+    [Migration("20200224121723_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,16 +23,18 @@ namespace ZipPay.Data.Migrations
 
             modelBuilder.Entity("ZipPay.Data.Entities.AccountEntity", b =>
                 {
-                    b.Property<int>("AccountNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<long>("AccountNumber");
 
-                    b.Property<bool>("Active");
+                    b.Property<decimal>("Balance");
 
-                    b.Property<string>("Email");
+                    b.Property<bool>("IsAccountActive");
+
+                    b.Property<Guid>("UserId");
 
                     b.HasKey("AccountNumber")
                         .HasName("PK_AccountEntity_AccountNumber");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("AccountEntities");
                 });
@@ -56,6 +58,15 @@ namespace ZipPay.Data.Migrations
                         .HasName("PK_UserEntity_EmailAddress");
 
                     b.ToTable("UserEntities");
+                });
+
+            modelBuilder.Entity("ZipPay.Data.Entities.AccountEntity", b =>
+                {
+                    b.HasOne("ZipPay.Data.Entities.UserEntity", "UserEntity")
+                        .WithMany("AccountEntities")
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("FK_AccountEntity_UserEntity")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

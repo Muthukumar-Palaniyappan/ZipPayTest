@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ZipPay.Business.Messages.Commands;
 using ZipPay.Business.Messages.Queries;
 using ZipPay.DataContract;
 
@@ -23,34 +25,31 @@ namespace ZipPay.API.Controllers
  
         // GET api/user
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetUserList()
+        [ProducesResponseType(typeof(List<UserDetail>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<List<UserDetail>>> GetUserList()
         {
-            return await _mediator.Send(new GetUserListQuery());
+            return Ok(await _mediator.Send(new GetUserListQuery()));
         }
 
         // GET api/user/doe@pubmail.com
         [HttpGet("{emailAddress}")]
-        public async Task<ActionResult<User>> GetUserByEmail(string emailAddress)
+        [ProducesResponseType(typeof(UserDetail), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<UserDetail>> GetUserByEmail(string emailAddress)
         {
-            return await _mediator.Send(new GetUserByEmailQuery(emailAddress));
+            return Ok(await _mediator.Send(new GetUserByEmailQuery(emailAddress)));
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(typeof(UserDetail), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<UserDetail>> Post([FromBody] User user)
         {
+            return Ok(await _mediator.Send(new CreateUserCommand(user)));
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

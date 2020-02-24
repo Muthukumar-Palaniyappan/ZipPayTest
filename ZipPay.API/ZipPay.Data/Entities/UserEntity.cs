@@ -16,6 +16,8 @@ namespace ZipPay.Data.Entities
         [Column(TypeName = "decimal(18,2)")]
         public decimal MonthlyExpense { get; set; }
 
+
+        public List<AccountEntity> AccountEntities { get; set; }
         //public UserEntity()
         //{
         //    UserId = Guid.NewGuid();

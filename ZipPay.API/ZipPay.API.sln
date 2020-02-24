@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZipPay.Business", "ZipPay.B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZipPay.DataContract", "ZipPay.DataContract\ZipPay.DataContract.csproj", "{39B8E2AF-5A28-486F-A130-1BBE20440FE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipPay.Data", "ZipPay.Data\ZipPay.Data.csproj", "{C4B25B0F-AE47-4E7D-B82E-871C400B4051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZipPay.Data", "ZipPay.Data\ZipPay.Data.csproj", "{C4B25B0F-AE47-4E7D-B82E-871C400B4051}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{866755D4-5D84-4F10-837A-C2441BA5CDC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipPay.Business.Tests", "ZipPay.Business.Tests\ZipPay.Business.Tests.csproj", "{6149574C-AEFC-4D3B-9A58-88E9D488DEAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,16 @@ Global
 		{C4B25B0F-AE47-4E7D-B82E-871C400B4051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4B25B0F-AE47-4E7D-B82E-871C400B4051}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4B25B0F-AE47-4E7D-B82E-871C400B4051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6149574C-AEFC-4D3B-9A58-88E9D488DEAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6149574C-AEFC-4D3B-9A58-88E9D488DEAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6149574C-AEFC-4D3B-9A58-88E9D488DEAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6149574C-AEFC-4D3B-9A58-88E9D488DEAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6149574C-AEFC-4D3B-9A58-88E9D488DEAC} = {866755D4-5D84-4F10-837A-C2441BA5CDC4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F8D2C6E-CA81-40A1-AE01-4E2FADB7C09B}

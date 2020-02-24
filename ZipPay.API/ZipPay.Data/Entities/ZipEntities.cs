@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ZipPay.Data.Entities
@@ -38,6 +39,11 @@ namespace ZipPay.Data.Entities
                 HasKey(p => p.AccountNumber).
                 HasName("PK_AccountEntity_AccountNumber");
 
+            modelBuilder.Entity<AccountEntity>().
+                HasOne(d => d.UserEntity)
+                .WithMany(p => p.AccountEntities)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_AccountEntity_UserEntity");
 
 
         }

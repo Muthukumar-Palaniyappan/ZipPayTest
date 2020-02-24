@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using ZipPay.Data.Entities;
 
-namespace ZipPay.Data.Repositories
+namespace ZipPay.Data.Repositories.Read
+
 {
-    public class UserRepository : IUserRepository
+    public class UserReadRepository : IUserReadRepository
     {
         private readonly ZipEntities _zipEntities = null;
 
-        public UserRepository()
+        public UserReadRepository()
         {
             _zipEntities = new ZipEntities();
         }
@@ -22,6 +23,11 @@ namespace ZipPay.Data.Repositories
             return await _zipEntities.UserEntities
                 .SingleOrDefaultAsync(u => string.Equals(u.EmailAddress,emailAddress,
                 StringComparison.OrdinalIgnoreCase));
+        }
+        public async Task<UserEntity> GetUserByUserIdAsync(Guid userId)
+        {
+            return await _zipEntities.UserEntities
+                .SingleOrDefaultAsync(u => u.UserId==userId);
         }
 
         public async Task<List<UserEntity>> GetUserListAsync()

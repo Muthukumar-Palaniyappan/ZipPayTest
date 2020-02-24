@@ -14,3 +14,5 @@
 /ZipPay.API/ZipPay.Data/obj
 /ZipPay.API/ZipPay.DataContract/bin/Debug/netcoreapp2.1
 /ZipPay.API/ZipPay.DataContract/obj
+/ZipPay.API/ZipPay.Business.Tests/bin/Debug/netcoreapp2.1
+/ZipPay.API/ZipPay.Business.Tests/obj

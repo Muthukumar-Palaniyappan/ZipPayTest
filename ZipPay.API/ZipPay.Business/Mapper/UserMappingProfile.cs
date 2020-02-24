@@ -11,7 +11,9 @@ namespace ZipPay.Business.Mapper
     {
         public UserMappingProfile()
         {
-            CreateMap<UserEntity, User>();
+            CreateMap<UserEntity, UserDetail>().ReverseMap();
+            CreateMap<User, UserEntity>();
+                
         }
 
     }

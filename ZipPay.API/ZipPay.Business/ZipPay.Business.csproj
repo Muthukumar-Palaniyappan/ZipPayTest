@@ -12,11 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\CommandHandler\" />
-    <Folder Include="Messages\Commands\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ZipPay.DataContract\ZipPay.DataContract.csproj" />
     <ProjectReference Include="..\ZipPay.Data\ZipPay.Data.csproj" />
   </ItemGroup>

@@ -11,7 +11,8 @@ namespace ZipPay.Business.Mapper
         {
             MapperConfiguration config = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new UserMappingProfile()); 
+                cfg.AddProfile(new UserMappingProfile());
+                cfg.AddProfile(new AccountMappingProfile());
             });
 
             return config;

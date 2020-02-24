@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using ZipPay.Data;
 using ZipPay.Data.Entities;
-using ZipPay.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using ZipPay.Business;
+using ZipPay.API.MiddleWare;
 
 namespace ZipPay.API
 {
@@ -38,31 +34,21 @@ namespace ZipPay.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ZipPay API", Version = "v1" });
+                
             });
-            //services.AddMediatR(typeof(Startup));
-            //var assembly = AppDomain.CurrentDomain.Load("ZipPay.Business");
-            //services.AddMediatR(assembly);
             
             services.AddDbContext<ZipEntities>();
-            ConfigureAppSettings(services);
             ConfigureDependencies(services);
-            
+          
+
         }
 
         private void ConfigureDependencies(IServiceCollection services)
         {
             services.AddBusinessDependencies();
-            services.AddScoped<IUserRepository,UserRepository>();
+            services.AddDataDependencies();
         }
 
-        private void ConfigureAppSettings(IServiceCollection services)
-        {
-            services.Configure<AppSettings>(options =>
-            {
-                options.ConnectionString
-                    = Configuration.GetSection("ConnectionStrings:DBConnection").Value;
-            });
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -77,18 +63,22 @@ namespace ZipPay.API
             }
 
             app.UseHttpsRedirection();
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZipPay API V1");
+                
                 c.RoutePrefix = string.Empty;
             });
+          
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<ZipEntities>();
                 context.Database.Migrate();
             }
+            //app.UseCustomExceptionHandler();
         }
     }
 }

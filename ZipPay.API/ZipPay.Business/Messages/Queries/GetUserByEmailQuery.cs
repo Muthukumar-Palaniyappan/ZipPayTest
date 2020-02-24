@@ -7,7 +7,7 @@ using ZipPay.DataContract;
 
 namespace ZipPay.Business.Messages.Queries
 {
-    public class GetUserByEmailQuery : IRequest<User>
+    public class GetUserByEmailQuery : IRequest<UserDetail>
     {
         public string EmailAddress { get; set; }
         public GetUserByEmailQuery(string emailAddress)
