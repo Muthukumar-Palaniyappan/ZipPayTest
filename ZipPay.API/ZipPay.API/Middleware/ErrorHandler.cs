@@ -11,10 +11,10 @@ using ZipPay.DataContract.Exceptions;
 
 namespace ZipPay.API.MiddleWare
 {
-    public class ErrorHandlingMiddleware
+    public class ErrorHandler
     {
         private readonly RequestDelegate next;
-        public ErrorHandlingMiddleware(RequestDelegate next)
+        public ErrorHandler(RequestDelegate next)
         {
             this.next = next;
         }

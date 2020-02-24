@@ -63,7 +63,7 @@ namespace ZipPay.API
             }
 
             app.UseHttpsRedirection();
-            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+            app.UseMiddleware(typeof(ErrorHandler));
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
