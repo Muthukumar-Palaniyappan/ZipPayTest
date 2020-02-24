@@ -9,6 +9,7 @@ MediatR for CQRS Pattern,
 AutoMapper  
 MS Tests  
 Moq  
+FluentAssertions  
 DataAnnotations for Validations  
 SwashBuckle for Swagger screen  
 
